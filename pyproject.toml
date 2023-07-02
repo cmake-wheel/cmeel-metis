@@ -14,7 +14,7 @@ homepage = "https://github.com/cmake-wheel/cmeel-metis"
 repository = "https://github.com/cmake-wheel/cmeel-metis.git"
 
 [tool.cmeel]
-build-number = 0
+build-number = 1
 py3-none = true
 run-tests = false
 
