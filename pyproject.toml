@@ -1,0 +1,21 @@
+[build-system]
+build-backend = "cmeel.build"
+requires = ["cmeel[build]"]
+
+[project]
+description = "cmeel distribution for METIS"
+license = "Apache-2.0"
+name = "cmeel-metis"
+requires-python = ">= 3.8"
+version = "5.1.0"
+
+[project.urls]
+homepage = "https://github.com/cmake-wheel/cmeel-metis"
+repository = "https://github.com/cmake-wheel/cmeel-metis.git"
+
+[tool.cmeel]
+py3-none = true
+run-tests = false
+
+[tool.tomlsort]
+all = true
