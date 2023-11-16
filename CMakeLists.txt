@@ -9,8 +9,8 @@ include(ExternalProject)
 ExternalProject_Add(
   ${NAME}
   URL "http://glaros.dtc.umn.edu/gkhome/fetch/sw/${NAME}/${NAME}-${VERSION}.tar.gz"
-      DOWNLOAD_EXTRACT_TIMESTAMP
-      OFF
+  URL_HASH "SHA1=4722c647024271540f2adcf83456ebdeb1b7d6a6"
+  DOWNLOAD_EXTRACT_TIMESTAMP OFF
   CMAKE_ARGS "-DSHARED=1" "-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}"
              "-DGKLIB_PATH=${CMAKE_BINARY_DIR}/${NAME}-prefix/src/${NAME}/GKlib"
 )
