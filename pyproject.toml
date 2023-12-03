@@ -12,6 +12,7 @@ version = "5.1.0"
 [project.urls]
 homepage = "https://github.com/cmake-wheel/cmeel-metis"
 repository = "https://github.com/cmake-wheel/cmeel-metis.git"
+upstream = "http://glaros.dtc.umn.edu/gkhome/metis/metis/overview"
 
 [tool.cmeel]
 build-number = 2
