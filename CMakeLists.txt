@@ -18,11 +18,10 @@ ExternalProject_Add(
   URL_HASH "SHA256=${SHA256}"
   DOWNLOAD_EXTRACT_TIMESTAMP OFF
   BUILD_IN_SOURCE ON
-  CONFIGURE_COMMAND "make" "config" "shared=1"
-      "prefix=${CMAKE_INSTALL_PREFIX}" "gklib_path=${GKLIB_PATH}"
+  CONFIGURE_COMMAND "make" "config" "shared=1" "prefix=${CMAKE_INSTALL_PREFIX}"
+                    "gklib_path=${GKLIB_PATH}"
   BUILD_COMMAND "make" "-i"
-  INSTALL_COMMAND "make" "install" "-i"
-  )
+  INSTALL_COMMAND "make" "install" "-i")
 
 # dummy file for install target
 install(FILES "README.md" DESTINATION "share/cmeel-${NAME}/")
