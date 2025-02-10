@@ -61,7 +61,7 @@ jobs:
           python -m pip install wheel simple503
           python -m simple503 --base-url ${{ github.workspace }}/wheelhouse ${{ github.workspace }}/wheelhouse
       - name: install deps
-        run: python -m pip install cmeel
+        run: python -m pip install cmeel cmeel-gklib
       - name: install wheel
         run: python -m pip install -i "file://${{ github.workspace }}/wheelhouse" cmeel-metis
 
