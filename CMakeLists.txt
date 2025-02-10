@@ -1,19 +1,27 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.30)
 
-set(NAME metis)
-set(VERSION 5.1.0)
+set(ORG KarypisLab)
+set(NAME METIS)
+set(VERSION 5.2.1)
+set(EXT tar.gz)
+set(SHA256 1a4665b2cd07edc2f734e30d7460afb19c1217c2547c2ac7bf6e1848d50aff7a)
+set(TAG_PREFIX refs/tags/v)
 
-project(cmeel-${NAME} VERSION ${VERSION})
+project("cmeel-${NAME}" VERSION "${VERSION}")
+
+find_path(GKLIB_PATH NAMES "include/GKlib.h")
 
 include(ExternalProject)
 ExternalProject_Add(
   ${NAME}
-  URL "http://glaros.dtc.umn.edu/gkhome/fetch/sw/${NAME}/${NAME}-${VERSION}.tar.gz"
-  URL_HASH "SHA1=4722c647024271540f2adcf83456ebdeb1b7d6a6"
+  URL "https://github.com/${ORG}/${NAME}/archive/${TAG_PREFIX}${VERSION}.${EXT}"
+  URL_HASH "SHA256=${SHA256}"
   DOWNLOAD_EXTRACT_TIMESTAMP OFF
-  CMAKE_ARGS "-DSHARED=1" "-DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}"
-             "-DGKLIB_PATH=${CMAKE_BINARY_DIR}/${NAME}-prefix/src/${NAME}/GKlib"
-)
+  BUILD_IN_SOURCE ON
+  CONFIGURE_COMMAND "make" "config" "shared=1" "prefix=${CMAKE_INSTALL_PREFIX}"
+                    "gklib_path=${GKLIB_PATH}"
+  BUILD_COMMAND "make" "-i"
+  INSTALL_COMMAND "make" "install" "-i")
 
 # dummy file for install target
-install(FILES README.md DESTINATION share/cmeel-${NAME}/)
+install(FILES "README.md" DESTINATION "share/cmeel-${NAME}/")
