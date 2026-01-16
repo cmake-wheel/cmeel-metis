@@ -18,6 +18,7 @@ ExternalProject_Add(
   URL_HASH "SHA256=${SHA256}"
   DOWNLOAD_EXTRACT_TIMESTAMP OFF
   BUILD_IN_SOURCE ON
+  PATCH_COMMAND "sed" "-i.bak" "s/VERSION 2.8/VERSION 3.10/" "CMakeLists.txt"
   CONFIGURE_COMMAND "make" "config" "shared=1" "prefix=${CMAKE_INSTALL_PREFIX}"
                     "gklib_path=${GKLIB_PATH}"
   BUILD_COMMAND "make" "-i"
