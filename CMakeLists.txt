@@ -9,7 +9,11 @@ set(TAG_PREFIX refs/tags/v)
 
 project("cmeel-${NAME}" VERSION "${VERSION}")
 
-find_path(GKLIB_PATH NAMES "include/GKlib.h")
+if(APPLE)
+  set(ORIGIN "@loader_path")
+else()
+  set(ORIGIN "\$\$ORIGIN")
+endif()
 
 include(ExternalProject)
 ExternalProject_Add(
@@ -18,9 +22,13 @@ ExternalProject_Add(
   URL_HASH "SHA256=${SHA256}"
   DOWNLOAD_EXTRACT_TIMESTAMP OFF
   BUILD_IN_SOURCE ON
-  PATCH_COMMAND "sed" "-i.bak" "s/VERSION 2.8/VERSION 3.10/" "CMakeLists.txt"
-  CONFIGURE_COMMAND "make" "config" "shared=1" "prefix=${CMAKE_INSTALL_PREFIX}"
-                    "gklib_path=${GKLIB_PATH}"
+  PATCH_COMMAND
+    "sh" "-c"
+    "sed -i.bak 's/VERSION 2.8/VERSION 3.10/' CMakeLists.txt && echo 'target_link_libraries(metis PUBLIC GKlib)' >> libmetis/CMakeLists.txt"
+  CONFIGURE_COMMAND
+    ${CMAKE_COMMAND} "-E" "env" "LDFLAGS=-Wl,-rpath,'${ORIGIN}/../lib'" "--"
+    "make" "config" "shared=1" "prefix=${CMAKE_INSTALL_PREFIX}"
+    "gklib_path=$ENV{CMEEL_AVAILABLE_PREFIX}"
   BUILD_COMMAND "make" "-i"
   INSTALL_COMMAND "make" "install" "-i")
 
