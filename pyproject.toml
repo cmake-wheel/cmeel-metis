@@ -3,6 +3,7 @@ build-backend = "cmeel"
 requires = ["cmeel-gklib", "cmeel[build]"]
 
 [project]
+dependencies = ["cmeel-gklib"]
 description = "cmeel distribution for METIS"
 license = "Apache-2.0"
 name = "cmeel-metis"
